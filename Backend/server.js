@@ -13,12 +13,10 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    app.listen(3001, () => {
-      console.log('Server connected to port 3001 and MongoDB');
-    });
+    console.log('MongoDb connected');
   })
   .catch((error) => {
-    console.log('Unable to connect to Server and/or MongoDB', error);
+    console.log('Unable to connect to MongoDB', error);
   });
 
 // Middleware
