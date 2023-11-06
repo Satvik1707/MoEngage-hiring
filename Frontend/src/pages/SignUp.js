@@ -16,7 +16,7 @@ function SignUp() {
 
     const fetchUsers = () => {
         axios
-        .get('http://localhost:3002/api/register')
+        .get('http://localhost:3002/api/users/register')
         .then((res) => {
             // console.log(res.data)
         })
@@ -26,7 +26,7 @@ function SignUp() {
     const handleSubmit = (event) => {
         event.preventDefault();
         axios
-        .post('http://localhost:3002/api/register', { email, username, password })
+        .post('http://localhost:3002/api/users/register', { email, username, password })
         .then(() => {
             alert('Registration Successful')
             setEmail('')

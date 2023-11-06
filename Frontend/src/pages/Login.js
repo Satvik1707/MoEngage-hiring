@@ -14,7 +14,7 @@ function Login() {
 
     const fetchUsers = () => {
         axios
-        .get('http://localhost:3002/api/register')
+        .get('http://localhost:3002/api/users/register')
         .then((res) => {
             console.log(res.data)
         })
@@ -24,7 +24,7 @@ function Login() {
     const handleLogin =  async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3002/api/login', { username, password })
+            const response = await axios.post('http://localhost:3002/api/users/login', { username, password })
             const token = response.data.token
             alert('Login successful')
             setUsername('')

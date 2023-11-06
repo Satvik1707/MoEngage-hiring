@@ -6,7 +6,7 @@ import "./Brewery.css";
 const BreweryDetails = () => {
   const { id } = useParams();
   const [brewery, setBrewery] = useState({});
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(1);
   const [review, setReview] = useState("");
   const [reviews, setReviews] = useState([]);
 
@@ -22,11 +22,12 @@ const BreweryDetails = () => {
       }
     };
 
-    // Fetch reviews for this brewery
     const fetchReviews = async () => {
       try {
-       
-        const response = await axios.get("your-api-endpoint-for-reviews");
+        const response = await axios.get(
+          `http://localhost:3002/api/reviews/get-reviews`
+        );
+        console.log(response)
         setReviews(response.data);
       } catch (error) {
         console.error("Error fetching reviews:", error);
@@ -37,8 +38,25 @@ const BreweryDetails = () => {
     fetchReviews();
   }, [id]);
 
-  const handleSubmitReview = () => {
+  const handleSubmitReview = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3002/api/reviews/add-review",
+        {
+          breweryId: id,
+          rating,
+          review,
+          user: "1",
+        }
+      );
 
+      setReviews([...reviews, response.data]);
+
+      setRating(1);
+      setReview("");
+    } catch (error) {
+      console.error("Error submitting review:", error);
+    }
   };
 
   return (

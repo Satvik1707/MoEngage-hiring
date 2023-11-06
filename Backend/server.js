@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const { dbURI } = require('./config/config');
 const userRoutes = require('./routes/userRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
 
 // Connect to MongoDB
 mongoose
@@ -24,7 +25,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Routes
-app.use('/api', userRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 app.get('/', (req, res) => {
   res.send('Welcome to your API!');
